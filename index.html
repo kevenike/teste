@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Botão com Mensagem e Fogos de Artifício</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <button id="showMessageButton">Clique aqui</button>
+        <p id="message" class="hidden">mostra a teta</p>
+        <div id="fireworks" class="hidden"></div>
+    </div>
+
+    <script>
+        const button = document.getElementById('showMessageButton');
+        const message = document.getElementById('message');
+        const fireworks = document.getElementById('fireworks');
+
+        button.addEventListener('click', () => {
+            message.classList.remove('hidden');
+            fireworks.classList.remove('hidden');
+
+            // Limpa os fogos de artifício anteriores
+            fireworks.innerHTML = '';
+
+            // Gera múltiplas explosões de fogos de artifício
+            for (let i = 0; i < 15; i++) { // Aumentando para 15 explosões
+                setTimeout(createFirework, i * 300); // Atraso entre as explosões
+            }
+
+            setTimeout(() => {
+                fireworks.classList.add('hidden');
+            }, 7000); // Efeitos somem após 7 segundos
+        });
+
+        function createFirework() {
+            const colors = [
+                '#FF4500', // Laranja vibrante
+                '#FFD700', // Dourado
+                '#ADFF2F', // Verde limão
+                '#00FA9A', // Verde água
+                '#1E90FF', // Azul
+                '#FF69B4', // Rosa choque
+                '#FF1493', // Rosa profundo
+                '#FF00FF', // Magenta
+                '#7FFF00', // Verde fluorescente
+                '#FF6347'  // Vermelho tomate
+            ];
+
+            const firework = document.createElement('div');
+            firework.classList.add('firework');
+            const x = Math.random() * 100; // Posição aleatória em x
+            const y = Math.random() * 100; // Posição aleatória em y
+            firework.style.left = `${x}vw`;
+            firework.style.top = `${y}vh`;
+
+            // Número de traços que formam cada explosão
+            const numTrails = 15;
+            for (let i = 0; i < numTrails; i++) {
+                const trail = document.createElement('div');
+                trail.classList.add('firework-trail');
+                const angle = (i / numTrails) * 2 * Math.PI; // Distribui os traços em um círculo
+                const length = Math.random() * 50 + 50; // Comprimento aleatório do traço
+                trail.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                trail.style.transform = `translate(-50%, -50%) rotate(${angle}rad) translateY(-${length}px)`; // Aplica a rotação e posição
+                fireworks.appendChild(trail);
+
+                // Remove o traço após um tempo
+                setTimeout(() => {
+                    trail.remove();
+                }, 1000); // Remove após 1 segundo
+            }
+        }
+    </script>
+</body>
+</html>

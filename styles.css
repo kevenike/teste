@@ -1,0 +1,72 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #d3d3d3;
+    overflow: hidden;
+}
+
+.container {
+    text-align: center;
+    position: relative;
+    z-index: 1;
+}
+
+button {
+    padding: 15px 30px;
+    font-size: 18px;
+    cursor: pointer;
+    border: none;
+    background-color: #ff851b;
+    color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+button:hover {
+    background-color: #ff7700;
+    transform: scale(1.05);
+}
+
+#message {
+    margin-top: 20px;
+    font-size: 24px;
+    font-weight: bold;
+    color: #ff4081;
+    transition: opacity 0.3s ease;
+}
+
+.hidden {
+    display: none;
+}
+
+/* Estilização dos fogos de artifício */
+.firework {
+    position: absolute;
+    width: 0; /* Oculto inicialmente */
+    height: 0; /* Oculto inicialmente */
+}
+
+.firework-trail {
+    position: absolute;
+    width: 2px; /* Largura dos traços */
+    height: 50px; /* Comprimento inicial dos traços */
+    background-color: transparent;
+    transform-origin: bottom; /* Ponto de origem da transformação */
+    animation: explode 3s ease forwards;
+}
+
+@keyframes explode {
+    0% {
+        opacity: 1;
+        height: 50px; /* Altura inicial */
+    }
+    100% {
+        opacity: 0;
+        height: 0; /* A altura diminui até 0 */
+    }
+}
